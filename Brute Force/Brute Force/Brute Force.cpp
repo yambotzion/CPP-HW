@@ -38,7 +38,7 @@ int main() {
 		cout << "x = " << xVal << ", y = " << yVal << endl;
 	}
 	else {
-		cout << "There is no solution";
+		cout << "There is no solution" << endl;
 	}
 	return 0;
 }
