@@ -101,3 +101,61 @@ void Time::advance() {
 		hour = 0;
 	}
 }
+
+void Time::advance(int m) {
+	if (m > 0) {
+		minutes += m;
+
+		if (minutes >= 60) {
+			hour += m/60;
+			minutes -= m;
+		}
+		if (hour > 23) {
+			hour = 0;
+		}
+	}
+}
+
+void Time::back() {
+	minutes -= 1;
+
+	if (minutes < 0) {
+		hour -= 1;
+		minutes = 59;
+	}
+	if (hour < 0) {
+		hour = 23;
+	}
+}
+int Time::minSinceMidnight() const {
+	return hour * 60 + minutes;
+
+}
+
+
+bool Time::operator==(const Time& r) const {
+	return this->minutes == r.GetMinute() && this->hour == r.GetHour();
+}
+
+bool Time::operator<(const Time& r) const {
+	return this->hour <= r.GetHour() && (this->hour == r.GetHour() && this->minutes < r.GetMinute());
+}
+
+ostream& operator<<(ostream &stream, const Time &r){
+	int tempHour = r.GetHour();
+	int tempMinute = r.GetMinute();
+	stream << to_string(tempHour);
+
+	stream << ":";
+
+	if (tempMinute < 10) {
+		stream << "0" + to_string(tempMinute);
+	}
+	else {
+		stream << to_string(tempMinute);
+	}
+
+	return stream;
+}
+
+
